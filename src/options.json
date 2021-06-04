@@ -1,0 +1,6 @@
+{
+    "error": {
+    "illegal_input": "The input is not valid.",
+    "no_computation": "Please choose a computation."
+    }
+}
