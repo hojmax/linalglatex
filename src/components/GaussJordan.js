@@ -21,6 +21,12 @@ function rowSwap(input, row1, row2, steps) {
     steps.push({ type: "swap", row1: row1, row2: row2, to: copy2d(input) })
 }
 
+function augmentRight(matrix1, matrix2) {
+    for (let i = 0; i < matrix1.length; i++) {
+        matrix1[i] = matrix1[i].concat(matrix2[i])
+    }
+}
+
 function rowScale(input, row1, scalar, steps) {
     const stepsScalar = nerdamer(scalar).toTeX()
     if (stepsScalar !== "1") {
