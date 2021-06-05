@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/linalglatex/static/css/main.076c0f18.chunk.css",
-    "main.js": "/linalglatex/static/js/main.41212572.chunk.js",
-    "main.js.map": "/linalglatex/static/js/main.41212572.chunk.js.map",
+    "main.css": "/linalglatex/static/css/main.54a470bc.chunk.css",
+    "main.js": "/linalglatex/static/js/main.5b43abfb.chunk.js",
+    "main.js.map": "/linalglatex/static/js/main.5b43abfb.chunk.js.map",
     "runtime-main.js": "/linalglatex/static/js/runtime-main.917e08c9.js",
     "runtime-main.js.map": "/linalglatex/static/js/runtime-main.917e08c9.js.map",
     "static/css/2.513582c2.chunk.css": "/linalglatex/static/css/2.513582c2.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.62308d6d.chunk.js.map": "/linalglatex/static/js/2.62308d6d.chunk.js.map",
     "index.html": "/linalglatex/index.html",
     "static/css/2.513582c2.chunk.css.map": "/linalglatex/static/css/2.513582c2.chunk.css.map",
-    "static/css/main.076c0f18.chunk.css.map": "/linalglatex/static/css/main.076c0f18.chunk.css.map",
+    "static/css/main.54a470bc.chunk.css.map": "/linalglatex/static/css/main.54a470bc.chunk.css.map",
     "static/js/2.62308d6d.chunk.js.LICENSE.txt": "/linalglatex/static/js/2.62308d6d.chunk.js.LICENSE.txt",
     "static/media/katex.min.css": "/linalglatex/static/media/KaTeX_Typewriter-Regular.b6a56b14.woff"
   },
@@ -18,7 +18,7 @@
     "static/js/runtime-main.917e08c9.js",
     "static/css/2.513582c2.chunk.css",
     "static/js/2.62308d6d.chunk.js",
-    "static/css/main.076c0f18.chunk.css",
-    "static/js/main.41212572.chunk.js"
+    "static/css/main.54a470bc.chunk.css",
+    "static/js/main.5b43abfb.chunk.js"
   ]
 }
