@@ -12,9 +12,6 @@ function MatrixTable(props) {
                             variant="contained" color="primary"
                             onClick={(event) => {
                                 if (props.grid.length > 1) {
-                                    if (props.errorMsg === options.error.nxn_dimensions) {
-                                        props.setErrorMsg("")
-                                    }
                                     let newGrid = props.grid.map(row => [...row])
                                     newGrid.splice(newGrid.length - 1, 1)
                                     props.setGrid(newGrid)
@@ -24,9 +21,6 @@ function MatrixTable(props) {
                             className="sizeButton mt-1"
                             variant="contained" color="primary"
                             onClick={(event) => {
-                                if (props.errorMsg === options.error.nxn_dimensions) {
-                                    props.setErrorMsg("")
-                                }
                                 let newGrid = props.grid.map(row => [...row])
                                 newGrid.push(Array(props.grid[0].length).fill(0))
                                 props.setGrid(newGrid)
@@ -50,9 +44,6 @@ function MatrixTable(props) {
                                             value={props.grid[i][j]}
                                             onKeyPress={(event) => event.key === 'Enter' && props.runComputation()}
                                             onChange={(event) => {
-                                                if (props.errorMsg === options.error.illegal_input) {
-                                                    props.setErrorMsg("")
-                                                }
                                                 let newGrid = props.grid.map(row => [...row])
                                                 newGrid[i][j] = event.target.value
                                                 props.setGrid(newGrid)
@@ -73,9 +64,6 @@ function MatrixTable(props) {
                             className="sizeButton"
                             onClick={(event) => {
                                 if (props.grid[0].length > 1) {
-                                    if (props.errorMsg === options.error.nxn_dimensions) {
-                                        props.setErrorMsg("")
-                                    }
                                     let newGrid = props.grid.map(row => [...row])
                                     for (let i = 0; i < newGrid.length; i++) {
                                         newGrid[i].splice(newGrid[i].length - 1, 1)
@@ -88,9 +76,6 @@ function MatrixTable(props) {
                             variant="contained" color="primary"
                             className="sizeButton ml-1"
                             onClick={(event) => {
-                                if (props.errorMsg === options.error.nxn_dimensions) {
-                                    props.setErrorMsg("")
-                                }
                                 let newGrid = props.grid.map(row => [...row])
                                 for (let i = 0; i < newGrid.length; i++) {
                                     newGrid[i].push(0)

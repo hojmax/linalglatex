@@ -11,6 +11,10 @@ th {
   height: 60px;
   font-size: 20px;
   border: none;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .matrixInput:hover:not(:focus) {
@@ -34,10 +38,10 @@ th {
 }
 
 .sizeButton {
-  min-width: 40px !important;
-  width: 40px !important;
-  height: 40px !important;
-  font-size: 20px;
+  min-width: 30px !important;
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 12px !important;
 }
 
 .computationForm {
@@ -102,13 +106,37 @@ th {
   }
 }
 
-@keyframes bounceIn {
+@keyframes fadeIn {
   0% {
     opacity: 0;
   }
 
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes shakeIn {
+  0% {
+    /* opacity: 0; */
+    transform: translate(-10px);
+  }
+
+  25% {
+    transform: translate(10px);
+  }
+
+  50% {
+    transform: translate(-5px);
+  }
+
+  75% {
+    transform: translate(5px);
+  }
+
+  100% {
+    transform: translate(0px);
+    /* opacity: 1; */
   }
 }
 
@@ -131,8 +159,14 @@ th {
   cursor: pointer;
 }
 
-.bounceIn {
-  animation-name: bounceIn;
+.shakeIn {
+  animation-name: shakeIn;
+  animation-duration: 0.5s;
+}
+
+
+.fadeIn {
+  animation-name: fadeIn;
   animation-duration: 0.5s;
 }
 
@@ -144,4 +178,15 @@ th {
   margin: auto;
   position: relative;
   display: inline-block;
+}
+
+@media (max-width : 320px) {
+  .latexContainer {
+    box-shadow: 0px 0px 20px #EEEEEE;
+    border-radius: 10px;
+    padding: 40px;
+    margin: auto;
+    position: relative;
+    display: inline-block;
+  }
 }
