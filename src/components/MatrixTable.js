@@ -20,7 +20,7 @@ function MatrixTable(props) {
         }
         return {
             animationName: choice,
-            animationDuration: "0.5s",
+            animationDuration: resized ? "0.5s" : "1s",
         }
     }
     return <table style={{ marginLeft: "-50px" }}>
