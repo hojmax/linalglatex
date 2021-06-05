@@ -8,6 +8,7 @@ function MatrixTable(props) {
                 <td style={{ textAlign: "center", verticalAlign: "middle" }}>
                     <div className="mr-2">
                         <Button
+                            size="small"
                             className="sizeButton"
                             variant="contained" color="primary"
                             onClick={(event) => {
@@ -18,6 +19,7 @@ function MatrixTable(props) {
                                 }
                             }}><i className="fas fa-minus"></i></Button><br />
                         <Button
+                            size="small"
                             className="sizeButton mt-1"
                             variant="contained" color="primary"
                             onClick={(event) => {
@@ -60,6 +62,7 @@ function MatrixTable(props) {
                 <td style={{ textAlign: "center", verticalAlign: "middle" }}>
                     <div className="mt-2">
                         <Button
+                            size="small"
                             variant="contained" color="primary"
                             className="sizeButton"
                             onClick={(event) => {
@@ -73,6 +76,7 @@ function MatrixTable(props) {
                                 //
                             }}><i className="fas fa-minus"></i></Button>
                         <Button
+                            size="small"
                             variant="contained" color="primary"
                             className="sizeButton ml-1"
                             onClick={(event) => {
