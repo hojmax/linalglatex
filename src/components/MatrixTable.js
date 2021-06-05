@@ -1,6 +1,28 @@
 import Button from '@material-ui/core/Button'
+import { useState } from "react"
 
 function MatrixTable(props) {
+    const [precendence, setPrecedence] = useState("waveVert")
+    const [direction, setDirection] = useState("")
+    const [resized, setResized] = useState(false)
+    const getAnimation = (i, j) => {
+        let choice = ""
+        if (!resized) {
+            choice = "waveVertAnti"
+        } else if (precendence === "waveVert") {
+            if (i === props.grid.length - 1) {
+                choice = "waveVert" + direction
+            }
+        } else {
+            if (j === props.grid[0].length - 1) {
+                choice = "waveHori" + direction
+            }
+        }
+        return {
+            animationName: choice,
+            animationDuration: "0.5s",
+        }
+    }
     return <table style={{ marginLeft: "-50px" }}>
         <tbody>
             <tr>
@@ -12,6 +34,9 @@ function MatrixTable(props) {
                             variant="contained" color="primary"
                             onClick={(event) => {
                                 if (props.grid.length > 1) {
+                                    setResized(true)
+                                    setPrecedence("waveVert")
+                                    setDirection("Anti")
                                     let newGrid = props.grid.map(row => [...row])
                                     newGrid.splice(newGrid.length - 1, 1)
                                     props.setGrid(newGrid)
@@ -22,6 +47,9 @@ function MatrixTable(props) {
                             className="sizeButton mt-1"
                             variant="contained" color="primary"
                             onClick={(event) => {
+                                setResized(true)
+                                setPrecedence("waveVert")
+                                setDirection("")
                                 let newGrid = props.grid.map(row => [...row])
                                 newGrid.push(Array(props.grid[0].length).fill(0))
                                 props.setGrid(newGrid)
@@ -37,11 +65,7 @@ function MatrixTable(props) {
                         <table style={{ margin: "auto" }}>
                             <tbody>
                                 {props.grid.map((array, i) => <tr key={`row${i}`}>
-                                    {array.map((e, j) => <td key={`e${i}${j}`} style={{
-                                        animationName: "wave",
-                                        animationDuration: "0.5s",
-                                        animationDelay: `${0.1 * j}s`
-                                    }}>
+                                    {array.map((e, j) => <td key={`e${i}${j}`} style={getAnimation(i, j)}>
                                         <input
                                             type="text"
                                             className="matrixInput"
@@ -70,6 +94,9 @@ function MatrixTable(props) {
                             className="sizeButton"
                             onClick={(event) => {
                                 if (props.grid[0].length > 1) {
+                                    setResized(true)
+                                    setPrecedence("waveHori")
+                                    setDirection("Anti")
                                     let newGrid = props.grid.map(row => [...row])
                                     for (let i = 0; i < newGrid.length; i++) {
                                         newGrid[i].splice(newGrid[i].length - 1, 1)
@@ -83,6 +110,9 @@ function MatrixTable(props) {
                             variant="contained" color="primary"
                             className="sizeButton ml-1"
                             onClick={(event) => {
+                                setResized(true)
+                                setPrecedence("waveHori")
+                                setDirection("")
                                 let newGrid = props.grid.map(row => [...row])
                                 for (let i = 0; i < newGrid.length; i++) {
                                     newGrid[i].push(0)

@@ -129,12 +129,24 @@ th {
   }
 }
 
-@keyframes wave {
+@keyframes waveVert {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  30% {
+    transform: translate(0px, 5px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes waveVertAnti {
   0% {
     transform: translate(0px, 0px);
   }
 
-  50% {
+  30% {
     transform: translate(0px, -5px);
   }
 
@@ -142,6 +154,35 @@ th {
     transform: translate(0px, 0px);
   }
 }
+
+@keyframes waveHori {
+  0% {
+    transform: translate(0px, 0px);
+  }
+
+  30% {
+    transform: translate(5px, 0px);
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes waveHoriAnti {
+  0% {
+    transform: translate(0px, 0px);
+  }
+
+  30% {
+    transform: translate(-5px, 0px);
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
 
 .shakeAnimation {
   animation-name: shake;
