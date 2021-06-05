@@ -39,7 +39,7 @@ function rowScale(input, row1, scalar, steps) {
 }
 
 function forwardReduction(input, steps) {
-    outer: for (let topRow = 0; topRow < input.length - 1; topRow++) {
+    for (let topRow = 0; topRow < input.length - 1; topRow++) {
         let j = 0
         loop2: while (j < input[0].length) {
             for (let i = topRow; i < input.length; i++) {
@@ -164,7 +164,7 @@ function helperGaussJordan(input, position = -1) {
         }
         output += `\t&\\xrightarrow{${action}}\n`
         output += array2dLatex(e.to, position)
-        if (i != steps.length - 1) {
+        if (i !== steps.length - 1) {
             output += "\\\\"
         }
     }

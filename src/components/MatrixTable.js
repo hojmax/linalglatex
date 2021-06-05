@@ -1,7 +1,6 @@
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
 
 function MatrixTable(props) {
-    const options = require("../options.json")
     return <table style={{ marginLeft: "-50px" }}>
         <tbody>
             <tr>
@@ -38,7 +37,11 @@ function MatrixTable(props) {
                         <table style={{ margin: "auto" }}>
                             <tbody>
                                 {props.grid.map((array, i) => <tr key={`row${i}`}>
-                                    {array.map((e, j) => <td key={`e${i}${j}`}>
+                                    {array.map((e, j) => <td key={`e${i}${j}`} style={{
+                                        animationName: "wave",
+                                        animationDuration: "0.5s",
+                                        animationDelay: `${0.1 * j}s`
+                                    }}>
                                         <input
                                             type="text"
                                             className="matrixInput"

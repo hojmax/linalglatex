@@ -2,7 +2,7 @@ import ComputationTable from './components/ComputationTable'
 import MatrixTable from './components/MatrixTable'
 import LatexView from './components/LatexView'
 import { GaussJordan, SquareInverse } from './components/GaussJordan'
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'katex/dist/katex.min.css'
 import './App.css'

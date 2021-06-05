@@ -129,9 +129,23 @@ th {
   }
 }
 
+@keyframes wave {
+  0% {
+    transform: translate(0px, 0px);
+  }
+
+  50% {
+    transform: translate(0px, -5px);
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
 .shakeAnimation {
   animation-name: shake;
-  animation-duration: 0.5s;
+  animation-duration: 0.2s;
 }
 
 .errorMsg {
