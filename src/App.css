@@ -21,14 +21,6 @@ th {
   box-shadow: 0px 0px 7px #DDDDDD;
 }
 
-.logoText {
-  position: absolute;
-  font-size: 25px;
-  top: 15px;
-  left: 40px;
-  font-weight: 500;
-}
-
 .matrixBrackets {
   padding: 7px;
   border: 4px solid #3f51b5;
@@ -151,8 +143,8 @@ th {
 
 .clipboardIcon {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 12px;
+  right: 15px;
   text-align: center;
   color: #3f51b5;
   font-size: 25px;
@@ -180,13 +172,26 @@ th {
   display: inline-block;
 }
 
-@media (max-width : 320px) {
+@media only screen and (max-width: 740px) {
   .latexContainer {
-    box-shadow: 0px 0px 20px #EEEEEE;
-    border-radius: 10px;
-    padding: 40px;
-    margin: auto;
-    position: relative;
-    display: inline-block;
+    min-width: unset;
   }
+}
+
+.logoText {
+  position: absolute;
+  font-size: 25px;
+  top: 15px;
+  left: 40px;
+  font-weight: 500;
+}
+
+.creditText {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.3;
 }

@@ -56,9 +56,9 @@ function App() {
     }
   }
 
-  return (<>
+  return (<div style={{ position: 'relative', minHeight: "100vh", paddingTop: "70px" }}>
     <div className="logoText">LinAlgLatex.io</div>
-    <center style={{ marginTop: "70px" }}>
+    <center>
       <MatrixTable
         grid={grid}
         setGrid={setGrid}
@@ -86,7 +86,8 @@ function App() {
         isCopied={isCopied}
         setIsCopied={setIsCopied} />}
     </center>
-  </>)
+      <p className="creditText">Built by Axel Højmark</p>
+  </div>)
 }
 
 export default App
