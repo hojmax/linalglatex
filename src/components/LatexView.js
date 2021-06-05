@@ -1,6 +1,8 @@
 import { useState } from "react"
 import Tooltip from '@material-ui/core/Tooltip';
-var Latex = require('react-latex');
+// var Latex = require('react-latex');
+import 'katex/dist/katex.min.css'
+import Latex from 'react-latex-next'
 
 function LatexView(props) {
     const [canShake, setCanShake] = useState(false)

@@ -1,5 +1,7 @@
 var nerdamer = require('nerdamer')
 const { det } = require('mathjs')
+// var algebra = require('algebra.js');
+// var Expression = algebra.Expression;
 
 function copy2d(input) {
     return input.map(arr => arr.slice());
@@ -122,7 +124,6 @@ function SquareInverse(input) {
     let hasInverse = true
     try {
         const determinant = det(input)
-        console.log(determinant)
         if (determinant === 0) {
             hasInverse = false
         }
@@ -145,6 +146,20 @@ function centerLatex(latex) {
     return `$$\\begin{aligned}\n${latex}\n\\end{aligned}$$`
 }
 
+function shouldAddParentheses(str) {
+    let bracketCount = 0
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] === "(") {
+            bracketCount += 1
+        } else if (str[i] === ")") {
+            bracketCount -= 1
+        } else if ((str[i] === "+" || str[i] === "-") && bracketCount === 0) {
+            return true
+        }
+    }
+    return false
+}
+
 function helperGaussJordan(input, position = -1) {
     let output = ""
     let steps = []
@@ -158,7 +173,11 @@ function helperGaussJordan(input, position = -1) {
         if (e.type === "addition") {
             action = `r_${e.row1 + 1}${e.scalar[0] === "-" ? "" : "+"}${e.scalar === "-1" ? "-" : (e.scalar !== 1 ? e.scalar : "")}r_${e.row2 + 1}\\to r_${e.row1 + 1}`
         } else if (e.type === "scale") {
-            action = `${e.scalar}r_${e.row1 + 1}\\to r_${e.row1 + 1}`
+            if (shouldAddParentheses(e.scalar)) {
+                action = `(${e.scalar})r_${e.row1 + 1}\\to r_${e.row1 + 1}`
+            } else {
+                action = `${e.scalar}r_${e.row1 + 1}\\to r_${e.row1 + 1}`
+            }
         } else if (e.type === "swap") {
             action = `r_${e.row1 + 1} \\leftrightarrow r_${e.row2 + 1}`
         }
@@ -168,6 +187,7 @@ function helperGaussJordan(input, position = -1) {
             output += "\\\\"
         }
     }
+    console.log(steps)
     return { latex: output, steps: steps }
 }
 
