@@ -19,7 +19,9 @@ function ComputationTable(props) {
         <tbody>
             <tr>
                 <td><FormControl className={classes.formControl}>
-                    <InputLabel>Computation</InputLabel>
+                    <InputLabel style={{
+                        fontFamily: "'Helvetica neue', sans-serif"
+                    }}>Computation</InputLabel>
                     <Select
                         value={props.computation}
                         onChange={(event) => {
@@ -28,6 +30,9 @@ function ComputationTable(props) {
                                 props.setErrorMsg("")
                             }
                         }}
+                        style={{
+                            fontFamily: "'Helvetica neue', sans-serif"
+                        }}
                     >
                         <MenuItem value={"gauss-jordan"}>Gauss-Jordan</MenuItem>
                         <MenuItem value={"square-inverse"}>Square Inverse</MenuItem>
@@ -35,7 +40,10 @@ function ComputationTable(props) {
                 </FormControl></td>
                 <td><Button
                     className="mt-1 ml-3"
-                    style={{ marginBottom: "-7px" }}
+                    style={{
+                        marginBottom: "-7px",
+                        fontFamily: "'Helvetica neue', sans-serif"
+                    }}
                     variant="contained" color="primary"
                     onClick={props.runComputation}>Run</Button></td>
             </tr>
