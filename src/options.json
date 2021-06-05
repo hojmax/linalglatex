@@ -2,6 +2,6 @@
     "error": {
     "illegal_input": "The input is not valid.",
     "no_computation": "Please choose a computation.",
-    "nxn_dimensions": "Please choose a n x n matrix."
+    "nxn_dimensions": "Please choose a n\u00D7n matrix."
     }
 }

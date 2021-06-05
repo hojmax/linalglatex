@@ -30,6 +30,7 @@ function ComputationTable(props) {
                         }}
                     >
                         <MenuItem value={"gauss-jordan"}>Gauss-Jordan</MenuItem>
+                        <MenuItem value={"square-inverse"}>Square Inverse</MenuItem>
                     </Select>
                 </FormControl></td>
                 <td><Button

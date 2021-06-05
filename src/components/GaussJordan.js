@@ -1,4 +1,5 @@
 var nerdamer = require('nerdamer')
+const { det } = require('mathjs')
 
 function copy2d(input) {
     return input.map(arr => arr.slice());
@@ -10,7 +11,7 @@ function rowAddition(input, row1, scalar, row2, steps) {
         for (let i = 0; i < input[row1].length; i++) {
             input[row1][i] = nerdamer(`${input[row1][i]} ${scalar} * (${input[row2][i]})`).text('fractions')
         }
-        steps.push({ type: "addition", row1: row1, scalar: nerdamer(scalar).toTeX(), row2: row2, to: copy2d(input) })
+        steps.push({ type: "addition", row1: row1, scalar: stepsScalar, row2: row2, to: copy2d(input) })
     }
 }
 
@@ -33,12 +34,12 @@ function rowScale(input, row1, scalar, steps) {
         for (let i = 0; i < input[row1].length; i++) {
             input[row1][i] = nerdamer(`${scalar} * (${input[row1][i]})`).text('fractions')
         }
-        steps.push({ type: "scale", row1: row1, scalar: nerdamer(scalar).toTeX(), to: copy2d(input) })
+        steps.push({ type: "scale", row1: row1, scalar: stepsScalar, to: copy2d(input) })
     }
 }
 
 function forwardReduction(input, steps) {
-    for (let topRow = 0; topRow < input.length - 1; topRow++) {
+    outer: for (let topRow = 0; topRow < input.length - 1; topRow++) {
         let j = 0
         loop2: while (j < input[0].length) {
             for (let i = topRow; i < input.length; i++) {
@@ -51,10 +52,34 @@ function forwardReduction(input, steps) {
             }
             j++
         }
+        if (j === input[0].length) {
+            break
+        }
         for (let v = topRow + 1; v < input.length; v++) {
             rowAddition(input, v, `-(${input[v][j]})/(${input[topRow][j]})`, topRow, steps)
         }
     }
+}
+
+function IdentityMatrix(n) {
+    let output = Array(n).fill(0).map(e => Array(n).fill(0))
+    for (let i = 0; i < n; i++) {
+        output[i][i] = 1
+    }
+    return output
+}
+
+function removeColumns(input, columns) {
+    let output = []
+    for (let i = 0; i < input.length; i++) {
+        output[i] = []
+        for (let j = 0; j < input[i].length; j++) {
+            if (!columns.includes(j)) {
+                output[i].push(input[i][j])
+            }
+        }
+    }
+    return output
 }
 
 function backwardReduction(input, steps) {
@@ -71,8 +96,14 @@ function backwardReduction(input, steps) {
     }
 }
 
-function array2dLatex(array2d) {
-    let output = `\\left[\\begin{array}{${"r".repeat(array2d[0].length)}}\n\t`
+function array2dLatex(array2d, position = -1) {
+    let alignment;
+    if (position !== -1) {
+        alignment = "r".repeat(position) + "|" + "r".repeat(array2d[0].length - position)
+    } else {
+        alignment = "r".repeat(array2d[0].length)
+    }
+    let output = `\\left[\\begin{array}{${alignment}}\n\t`
     for (let i = 0; i < array2d.length; i++) {
         for (let j = 0; j < array2d[i].length; j++) {
             output += nerdamer(array2d[i][j].toString()).toTeX()
@@ -87,13 +118,40 @@ function array2dLatex(array2d) {
     return output
 }
 
-function GaussJordan(input) {
-    let output = "\\begin{aligned}\n"
+function SquareInverse(input) {
+    let hasInverse = true
+    try {
+        const determinant = det(input)
+        console.log(determinant)
+        if (determinant === 0) {
+            hasInverse = false
+        }
+    } catch { }
+    if (hasInverse) {
+        let copy = copy2d(input)
+        augmentRight(copy, IdentityMatrix(input.length))
+        let output = `A&=${array2dLatex(input)}\\\\\n`
+        let gauss = helperGaussJordan(copy, input.length)
+        output += gauss.latex
+        let inverse = removeColumns(gauss.steps[gauss.steps.length - 1].to, [...Array(input.length).keys()])
+        output += `\\\\\nA^{-1}&=${array2dLatex(inverse)}`
+        return centerLatex(output)
+    } else {
+        return "This\\: matrix\\: has\\: no\\: inverse\\: as\\: its\\: determinant\\: is\\: 0."
+    }
+}
+
+function centerLatex(latex) {
+    return `$$\\begin{aligned}\n${latex}\n\\end{aligned}$$`
+}
+
+function helperGaussJordan(input, position = -1) {
+    let output = ""
     let steps = []
     let copy = copy2d(input)
     forwardReduction(copy, steps)
     backwardReduction(copy, steps)
-    output += array2dLatex(input) + "\n"
+    output += array2dLatex(input, position) + "\n"
     for (let i = 0; i < steps.length; i++) {
         const e = steps[i]
         let action = "r_1";
@@ -105,11 +163,16 @@ function GaussJordan(input) {
             action = `r_${e.row1 + 1} \\leftrightarrow r_${e.row2 + 1}`
         }
         output += `\t&\\xrightarrow{${action}}\n`
-        output += array2dLatex(e.to)
-        output += "\\\\\n"
+        output += array2dLatex(e.to, position)
+        if (i != steps.length - 1) {
+            output += "\\\\"
+        }
     }
-    output += "\\end{aligned}"
-    return output
+    return { latex: output, steps: steps }
 }
 
-export default GaussJordan
+function GaussJordan(input, position = -1) {
+    return centerLatex(helperGaussJordan(input, position).latex)
+}
+
+export { GaussJordan, SquareInverse }
