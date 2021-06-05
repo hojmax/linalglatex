@@ -12,6 +12,17 @@ const defaultMatrix = [
   [0, "1/7"]
 ]
 
+const containsEmpty = (grid) => {
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      if (grid[i][j] === "") {
+        return true
+      }
+    }
+  }
+  return false;
+}
+
 function App() {
   const [latexString, setLatexString] = useState("")
   const [grid, setGrid] = useState(defaultMatrix)
@@ -27,7 +38,10 @@ function App() {
       setCanErrorShake(true)
       setErrorMsg(options.error.no_computation)
     } else {
-      if (computation === "gauss-jordan") {
+      if (containsEmpty(grid)) {
+        setCanErrorShake(true)
+        setErrorMsg(options.error.illegal_input)
+      } else if (computation === "gauss-jordan") {
         try {
           setLatexString(GaussJordan(grid))
           setCanBounce(true)
@@ -86,7 +100,7 @@ function App() {
         isCopied={isCopied}
         setIsCopied={setIsCopied} />}
     </center>
-      <p className="creditText">Built by Axel Højmark</p>
+    <p className="creditText">Built by Axel Højmark</p>
   </div>)
 }
 
