@@ -160,9 +160,11 @@ th {
   0% {
     transform: translate(0px, 0px);
   }
+
   30% {
     transform: translate(0px, -5px);
   }
+
   100% {
     transform: translate(0px, 0px);
   }
@@ -184,9 +186,11 @@ th {
   0% {
     transform: translate(0px, 0px);
   }
+
   30% {
     transform: translate(-5px, 0px);
   }
+
   100% {
     transform: translate(0px, 0px);
   }
@@ -228,6 +232,8 @@ th {
   border-radius: 10px;
   padding: 40px;
   min-width: 700px;
+  /* max-width: 95%;
+  overflow: scroll; */
   margin: auto;
   position: relative;
   display: inline-block;

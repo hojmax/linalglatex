@@ -149,11 +149,11 @@ function centerLatex(latex) {
 function shouldAddParentheses(str) {
     let bracketCount = 0
     for (let i = 0; i < str.length; i++) {
-        if (str[i] === "(") {
+        if (str[i] === "(" || str[i] === "{") {
             bracketCount += 1
-        } else if (str[i] === ")") {
+        } else if (str[i] === ")" || str[i] === "}") {
             bracketCount -= 1
-        } else if ((str[i] === "+" || str[i] === "-") && bracketCount === 0) {
+        } else if ((str[i] === "+" || str[i] === "-") && bracketCount === 0 && i !== 0) {
             return true
         }
     }
@@ -171,7 +171,11 @@ function helperGaussJordan(input, position = -1) {
         const e = steps[i]
         let action = "r_1";
         if (e.type === "addition") {
-            action = `r_${e.row1 + 1}${e.scalar[0] === "-" ? "" : "+"}${e.scalar === "-1" ? "-" : (e.scalar !== 1 ? e.scalar : "")}r_${e.row2 + 1}\\to r_${e.row1 + 1}`
+            if (shouldAddParentheses(e.scalar)) {
+                action = `r_${e.row1 + 1}+(${e.scalar})r_${e.row2 + 1}\\to r_${e.row1 + 1}`
+            } else {
+                action = `r_${e.row1 + 1}${e.scalar[0] === "-" ? "" : "+"}${e.scalar === "-1" ? "-" : (e.scalar !== 1 ? e.scalar : "")}r_${e.row2 + 1}\\to r_${e.row1 + 1}`
+            }
         } else if (e.type === "scale") {
             if (shouldAddParentheses(e.scalar)) {
                 action = `(${e.scalar})r_${e.row1 + 1}\\to r_${e.row1 + 1}`
@@ -187,7 +191,6 @@ function helperGaussJordan(input, position = -1) {
             output += "\\\\"
         }
     }
-    console.log(steps)
     return { latex: output, steps: steps }
 }
 

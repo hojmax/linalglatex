@@ -18,7 +18,7 @@ function LatexView(props) {
     }
     return <div
         className={"mt-4 latexContainer " + (props.canBounce && "fadeIn")}
-        style={{marginBottom: "30px"}}
+        style={{ marginBottom: "30px" }}
         onAnimationEnd={() => props.setCanBounce(false)}>
         <Tooltip title={props.isCopied ? "Copied!" : "Copy LaTeX"}>
             <i onAnimationEnd={() => setCanShake(false)}
