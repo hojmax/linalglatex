@@ -101,16 +101,16 @@ function backwardReduction(input, steps) {
 function array2dLatex(array2d, position = -1) {
     let alignment;
     if (position !== -1) {
-        alignment = "r".repeat(position) + "|" + "r".repeat(array2d[0].length - position)
+        alignment = "c".repeat(position) + "|" + "c".repeat(array2d[0].length - position)
     } else {
-        alignment = "r".repeat(array2d[0].length)
+        alignment = "c".repeat(array2d[0].length)
     }
     let output = `\\left[\\begin{array}{${alignment}}\n\t`
     for (let i = 0; i < array2d.length; i++) {
         for (let j = 0; j < array2d[i].length; j++) {
             output += nerdamer(array2d[i][j].toString()).toTeX()
             if (j === array2d[i].length - 1) {
-                output += "\\\\\n" + (i !== array2d.length - 1 ? "\t" : "")
+                output += "\\\\" + (i !== array2d.length - 1 ? "[5pt]" : "") + "\n" + (i !== array2d.length - 1 ? "\t" : "")
             } else {
                 output += " & "
             }

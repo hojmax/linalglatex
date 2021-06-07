@@ -2,7 +2,7 @@ import ComputationTable from './components/ComputationTable'
 import MatrixTable from './components/MatrixTable'
 import LatexView from './components/LatexView'
 import { GaussJordan, SquareInverse } from './components/GaussJordan'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'katex/dist/katex.min.css'
 import './App.css'
@@ -32,7 +32,11 @@ function App() {
   const [canErrorShake, setCanErrorShake] = useState(true)
   const [isCopied, setIsCopied] = useState(false)
   const options = require("./options.json")
-
+  useEffect(() => {
+    window.gtag('send', 'pageview', {
+      page: window.location.pathname
+    });
+  }, [])
   const runComputation = () => {
     if (computation === "") {
       setCanErrorShake(true)
