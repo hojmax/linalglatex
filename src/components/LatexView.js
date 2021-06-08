@@ -16,17 +16,29 @@ function LatexView(props) {
         }
         return output
     }
-    return <div
-        className={"mt-4 latexContainer " + (props.canBounce && "fadeIn")}
-        style={{ marginBottom: "30px" }}
-        onAnimationEnd={() => props.setCanBounce(false)}>
-        <Tooltip title={props.isCopied ? "Copied!" : "Copy LaTeX"}>
-            <i onAnimationEnd={() => setCanShake(false)}
-                onClick={() => { setCanShake(true); props.setIsCopied(true); navigator.clipboard.writeText(props.latexString) }}
-                className={getClipboardClassname()}></i>
-        </Tooltip>
-        <Latex>{props.latexString}</Latex>
+    return <div className="latexWrapper">
+        <div
+            className={"mt-4 latexContainer " + (props.canBounce && "fadeIn")}
+            style={{ marginBottom: "30px" }}
+            onAnimationEnd={() => props.setCanBounce(false)}>
+            <Tooltip title={props.isCopied ? "Copied!" : "Copy LaTeX"}>
+                <i onAnimationEnd={() => setCanShake(false)}
+                    onClick={() => { setCanShake(true); props.setIsCopied(true); navigator.clipboard.writeText(props.latexString) }}
+                    className={getClipboardClassname()}></i>
+            </Tooltip>
+            <Latex>{props.latexString}</Latex>
+        </div>
     </div>
 }
+
+
+{/* <div style={{
+    top: "0px",
+    bottom: "0px",
+    left: "0px",
+    right: "0px",
+    position: "absolute",
+    backgroundColor: "red"
+}}> */}
 
 export default LatexView
