@@ -240,6 +240,12 @@ th {
   overflow: scroll;
   margin: auto;
   display: inline-block;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.latexContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .shakeIn {

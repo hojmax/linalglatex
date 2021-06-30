@@ -31,14 +31,4 @@ function LatexView(props) {
     </div>
 }
 
-
-{/* <div style={{
-    top: "0px",
-    bottom: "0px",
-    left: "0px",
-    right: "0px",
-    position: "absolute",
-    backgroundColor: "red"
-}}> */}
-
 export default LatexView
